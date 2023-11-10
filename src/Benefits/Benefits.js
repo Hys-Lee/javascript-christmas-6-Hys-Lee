@@ -7,8 +7,6 @@ export default class Benefits {
 
   // 일단 10_000원 넘게 구매했다 가정.
   resultDiscountingPrice(purchaseKindList, OriginalPruchasePrice) {
-    //
-
     const isWeekEnd =
       this.#dateInfo.theDayOfWeek === 1 || this.#dateInfo.theDayOfWeek === 2;
     const isStarDay =
