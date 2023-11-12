@@ -11,7 +11,7 @@ describe('EventModel 테스트', () => {
     const dateInfo = { day: 2, dayOfTheWeek: DayOfTheWeek.SATURDAY };
     const order = { menuCount: { desert: 1, main: 1 }, payment: 10_000 };
     const eventsModel = new EventsModel(dateInfo, order);
-    const result = eventsModel.calculateDDayDiscount();
+    const result = eventsModel.resultDDayDiscount();
     const output = 1_100;
     expect(result).toBe(output);
   });
@@ -20,7 +20,7 @@ describe('EventModel 테스트', () => {
     const dateInfo = { day: 4, dayOfTheWeek: DayOfTheWeek.MONDAY };
     const order = { menuCount: { desert: 2, main: 3 }, payment: 10_000 };
     const eventsModel = new EventsModel(dateInfo, order);
-    const result = eventsModel.calculateWeekdayDiscount();
+    const result = eventsModel.resultWeekdayDiscount();
     const output = 2_023 * 2;
     expect(result).toBe(output);
   });
@@ -28,15 +28,17 @@ describe('EventModel 테스트', () => {
     const dateInfo = { day: 1, dayOfTheWeek: DayOfTheWeek.FRIDAY };
     const order = { menuCount: { desert: 2, main: 3 }, payment: 10_000 };
     const eventsModel = new EventsModel(dateInfo, order);
-    const result = eventsModel.calculateWeekendDiscount();
+    const conditionResult = eventsModel.checkWeekendDiscount();
+    const result = eventsModel.resultWeekendDiscount();
     const output = 2_023 * 3;
+    expect(conditionResult).toBe(true);
     expect(result).toBe(output);
   });
   test('특별 할인 테스트', () => {
     const dateInfo = { day: 25, dayOfTheWeek: DayOfTheWeek.MONDAY };
     const order = { menuCount: { desert: 2, main: 3 }, payment: 10_000 };
     const eventsModel = new EventsModel(dateInfo, order);
-    const result = eventsModel.calculateSpecialDiscount();
+    const result = eventsModel.resultSpecialDiscount();
     const output = 1_000;
     expect(result).toBe(output);
   });
@@ -45,8 +47,26 @@ describe('EventModel 테스트', () => {
     const dateInfo = { day: 25, dayOfTheWeek: DayOfTheWeek.MONDAY };
     const order = { menuCount: { desert: 2, main: 12 }, payment: 121_000 };
     const eventsModel = new EventsModel(dateInfo, order);
-    const result = eventsModel.calculateGiftPrice();
+    const result = eventsModel.resultGiftPrice(order.payment);
     const output = 25_000;
     expect(result).toBe(output);
+  });
+  test('뱃지 부여 테스트', () => {
+    const output = {
+      none: '없음',
+      star: '별',
+      tree: '트리',
+      santa: '산타',
+    };
+    const result = {
+      none: EventsModel.giveBadge(500),
+      star: EventsModel.giveBadge(5_000),
+      tree: EventsModel.giveBadge(10_000),
+      santa: EventsModel.giveBadge(20_000),
+    };
+    expect(result.none).toBe(output.none);
+    expect(result.star).toBe(output.star);
+    expect(result.tree).toBe(output.tree);
+    expect(result.santa).toBe(output.santa);
   });
 });
