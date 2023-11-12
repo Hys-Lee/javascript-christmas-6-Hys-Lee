@@ -11,11 +11,14 @@ class EventsModel {
 
   #payment;
 
+  #specialDiscount;
+
   constructor(dateInfo, order) {
     this.#day = dateInfo.day;
     this.#dayOfTheWeek = dateInfo.dateInfo;
     this.#menuCount = order.menuCount;
     this.#payment = order.payment;
+    this.#specialDiscount = 1_000;
   }
 
   calculateDDayDiscount() {
@@ -28,6 +31,10 @@ class EventsModel {
 
   calculateWeekendDiscount() {
     return this.#menuCount.main * 2_023;
+  }
+
+  calculateSpecialDiscount() {
+    return this.#specialDiscount;
   }
 }
 
