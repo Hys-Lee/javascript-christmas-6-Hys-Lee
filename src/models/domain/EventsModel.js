@@ -1,3 +1,5 @@
+import { MENULIST } from '../constants/MenuData';
+
 class EventsModel {
   /**
    * @param {day, dayOfTheWeek} dateInfo
@@ -13,12 +15,15 @@ class EventsModel {
 
   #specialDiscount;
 
+  #giftPrice;
+
   constructor(dateInfo, order) {
     this.#day = dateInfo.day;
     this.#dayOfTheWeek = dateInfo.dateInfo;
     this.#menuCount = order.menuCount;
     this.#payment = order.payment;
     this.#specialDiscount = 1_000;
+    this.#giftPrice = MENULIST.drink.champagne;
   }
 
   calculateDDayDiscount() {
@@ -35,6 +40,10 @@ class EventsModel {
 
   calculateSpecialDiscount() {
     return this.#specialDiscount;
+  }
+
+  calculateGiftPrice() {
+    return this.#giftPrice;
   }
 }
 
