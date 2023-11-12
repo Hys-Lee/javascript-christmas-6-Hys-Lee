@@ -17,9 +17,9 @@
      - [x] 1-6. 증정
        - [x] 1-2-1. 테스트
        - [x] 1-2-2. 구현 완료
-     - [ ] 1-7. 뱃지 부여
+     - [x] 1-7. 뱃지 부여
        - [x] 1-2-1. 테스트
-       - [ ] 1-2-2. 구현 완료
+       - [x] 1-2-2. 구현 완료
 - [ ] 2. 적용 가능 이벤트 체크 (EventPlannerController)
 - [ ] 3. 주문한 메뉴 타입 분류 및 카운팅 (EventPlannerController)
 - [ ] 4. 주문 object로 변경 (EventOrderHandler)

@@ -78,6 +78,14 @@ class EventsModel {
     if (totalPayment < 120_000) return 0;
     return this.#giftPrice;
   }
+
+  // totalBenefits은 palnner의 정보. 총혜택 금액
+  static giveBadge(totalBenefits) {
+    if (totalBenefits < 5_000) return '없음';
+    if (totalBenefits < 10_000) return '별';
+    if (totalBenefits < 20_000) return '트리';
+    return '산타';
+  }
 }
 
 export default EventsModel;
