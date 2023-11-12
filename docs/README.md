@@ -2,7 +2,7 @@
 
 - [ ] 1. 이벤트 조건 (EventsModel)
      - [x] 1-1. 요일 상수 (DayOfTheWeek)
-     - [ ] 1-2. D-day 할인
+     - [x] 1-2. D-day 할인
 - [ ] 2. 적용 가능 이벤트 체크 (EventPlannerController)
 - [ ] 3. 주문한 메뉴 타입 분류 및 카운팅 (EventPlannerController)
 - [ ] 4. 주문 object로 변경 (EventOrderHandler)
