@@ -25,6 +25,10 @@ class EventsModel {
   calculateWeekdayDiscount() {
     return this.#menuCount.desert * 2_023;
   }
+
+  calculateWeekendDiscount() {
+    return this.#menuCount.main * 2_023;
+  }
 }
 
 export default EventsModel;
