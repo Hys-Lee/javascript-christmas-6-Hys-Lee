@@ -20,11 +20,19 @@ describe('EventModel 테스트', () => {
     expect(result).toBe(output);
   });
   test('주말 할인 테스트', () => {
-    const dateInfo = { day: 4, dayOfTheWeek: DayOfTheWeek.MONDAY };
+    const dateInfo = { day: 1, dayOfTheWeek: DayOfTheWeek.FRIDAY };
     const order = { menuCount: { desert: 2, main: 3 }, payment: 10_000 };
     const eventsModel = new EventsModel(dateInfo, order);
     const result = eventsModel.calculateWeekendDiscount();
     const output = 2_023 * 3;
+    expect(result).toBe(output);
+  });
+  test('특별 할인 테스트', () => {
+    const dateInfo = { day: 25, dayOfTheWeek: DayOfTheWeek.MONDAY };
+    const order = { menuCount: { desert: 2, main: 3 }, payment: 10_000 };
+    const eventsModel = new EventsModel(dateInfo, order);
+    const result = eventsModel.calculateSpecialDiscount();
+    const output = 1_000;
     expect(result).toBe(output);
   });
 });
