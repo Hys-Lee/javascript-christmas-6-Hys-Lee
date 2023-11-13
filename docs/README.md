@@ -1,39 +1,45 @@
 # 개발 순서
 
-- [ ] 1. 이벤트 조건 (EventsModel)
+- [x] 1. 이벤트 조건 (EventsModel)
      - [x] 1-1. 요일 상수 (DayOfTheWeek)
      - [x] 1-2. D-day 할인
        - [x] 1-2-1. 테스트
        - [x] 1-2-2. 구현 완료
      - [x] 1-3. 평일 할인
-       - [x] 1-2-1. 테스트
-       - [x] 1-2-2. 구현 완료
+       - [x] 1-3-1. 테스트
+       - [x] 1-3-2. 구현 완료
      - [x] 1-4. 주말 할인
-       - [x] 1-2-1. 테스트
-       - [x] 1-2-2. 구현 완료
+       - [x] 1-4-1. 테스트
+       - [x] 1-4-2. 구현 완료
      - [x] 1-5. 스페셜 할인
-       - [x] 1-2-1. 테스트
-       - [x] 1-2-2. 구현 완료
+       - [x] 1-5-1. 테스트
+       - [x] 1-5-2. 구현 완료
      - [x] 1-6. 증정
-       - [x] 1-2-1. 테스트
-       - [x] 1-2-2. 구현 완료
+       - [x] 1-6-1. 테스트
+       - [x] 1-6-2. 구현 완료
      - [x] 1-7. 뱃지 부여
-       - [x] 1-2-1. 테스트
-       - [x] 1-2-2. 구현 완료
-- [ ] 2. 적용 가능 이벤트 체크 (EventPlannerController)
-- [ ] 3. 주문한 메뉴 타입 분류 및 카운팅 (EventPlannerController)
-- [ ] 4. 주문 object로 변경 (EventOrderHandler)
-- [ ] 5. 주문 조건 검증 (EventInputValidator)
-- [ ] 6. 요일 산출 (EventDayHandler)
-- [ ] 7. 날짜 조건 검증 (EventInputValidator)
-- [ ] 8. 입력값 형식 검증 (EventInputValidator)
-- [ ] 9. 메뉴 정보 저장 (MenuData)
-- [ ] 10. 출력관련 조건 체크 (EventPlannerController)
-- [ ] 11. 입력기에 입력 값 반환 및 코멘트 인자 (InputView)
-- [ ] 12. 출력기에 코멘트 인자 (OutputView)
-- [ ] 13. 애플리케이션 입력,동작,출력 흐름 실행 (App)
-- [ ] 14. 사용자 데이터 저장 (UserData)
-- [ ] 15. 주문 데이터 저장 (OrderData)
+       - [x] 1-7-1. 테스트
+       - [x] 1-7-2. 구현 완료
+- [x] 2. 이벤트 적용 (EventPlannerController)
+  - [x] 2-1. 적용 가능 이벤트 체크
+  - [x] 2-1. 혜택 내역 산출
+- [ ] 3. 각종 산출 금액 계산 (EventPlannerController)
+  - [ ] 3-1. 총혜택 금액 계산
+  - [ ] 3-2. 할인 전 총주문 금액 계산
+  - [ ] 3-3. 할인 후 예상 결제 금액 계산
+- [ ] 4. 주문한 메뉴 타입 분류 및 카운팅 (EventPlannerController)
+- [ ] 5. 주문 object로 변경 (EventOrderHandler)
+- [ ] 6. 주문 조건 검증 (EventInputValidator)
+- [ ] 7. 요일 산출 (EventDayHandler)
+- [ ] 8. 날짜 조건 검증 (EventInputValidator)
+- [ ] 9. 입력값 형식 검증 (EventInputValidator)
+- [ ] 10. 메뉴 정보 저장 (MenuData)
+- [ ] 11. 출력관련 조건 체크 (EventPlannerController)
+- [ ] 12. 입력기에 입력 값 반환 및 코멘트 인자 (InputView)
+- [ ] 13. 출력기에 코멘트 인자 (OutputView)
+- [ ] 14. 애플리케이션 입력,동작,출력 흐름 실행 (App)
+- [ ] 15. 사용자 데이터 저장 (UserData)
+- [ ] 16. 주문 데이터 저장 (OrderData)
 
 <br>
 <br>
