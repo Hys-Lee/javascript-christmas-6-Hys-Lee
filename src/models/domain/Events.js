@@ -1,7 +1,7 @@
-import { MENULIST } from '../constants/MenuData';
-import DayOfTheWeek from '../constants/DayOfTheWeek';
+import { MENULIST } from '../constants/MenuData.js';
+import DAYOFTHEWEEK from '../constants/DayOfTheWeek.js';
 
-class EventsModel {
+class Events {
   /**
    * @param {day, dayOfTheWeek} dateInfo
    * @param { menuCount: { desert, main }, payment } order
@@ -38,8 +38,8 @@ class EventsModel {
 
   checkWeekdayDiscount() {
     const dayOfTheWeekCondition =
-      this.#dayOfTheWeek !== DayOfTheWeek.FRIDAY ||
-      this.#dayOfTheWeek !== DayOfTheWeek.SATURDAY;
+      this.#dayOfTheWeek !== DAYOFTHEWEEK.FRIDAY &&
+      this.#dayOfTheWeek !== DAYOFTHEWEEK.SATURDAY;
     const menuCondition = this.#menuCount.desert > 0;
     return dayOfTheWeekCondition && menuCondition;
   }
@@ -51,8 +51,8 @@ class EventsModel {
 
   checkWeekendDiscount() {
     const dayOfTheWeekCondition =
-      this.#dayOfTheWeek === DayOfTheWeek.FRIDAY ||
-      this.#dayOfTheWeek === DayOfTheWeek.SATURDAY;
+      this.#dayOfTheWeek === DAYOFTHEWEEK.FRIDAY ||
+      this.#dayOfTheWeek === DAYOFTHEWEEK.SATURDAY;
     const menuCondition = this.#menuCount.main > 0;
     return dayOfTheWeekCondition && menuCondition;
   }
@@ -63,7 +63,7 @@ class EventsModel {
   }
 
   checkSpecialDiscount() {
-    const dayOfTheWeekCondition = this.#dayOfTheWeek === DayOfTheWeek.SUNDAY;
+    const dayOfTheWeekCondition = this.#dayOfTheWeek === DAYOFTHEWEEK.SUNDAY;
     const CHRISTMAS_DAY = 25;
     return this.#day === CHRISTMAS_DAY || dayOfTheWeekCondition;
   }
@@ -88,4 +88,4 @@ class EventsModel {
   }
 }
 
-export default EventsModel;
+export default Events;
