@@ -12,10 +12,10 @@
   - [x] 2-1. 적용 가능 이벤트 체크
   - [x] 2-1. 혜택 내역 산출
 - [x] 3. 주문한 메뉴 타입 분류 및 카운팅 (EventPlanner)
-- [ ] 4. 각종 산출 금액 계산 (EventPlanner)
+- [x] 4. 각종 산출 금액 계산 (EventPlanner)
   - [x] 4-1. 총혜택 금액 계산
   - [x] 4-2. 할인 전 총주문 금액 계산
-  - [ ] 4-3. 할인 후 예상 결제 금액 계산
+  - [x] 4-3. 할인 후 예상 결제 금액 계산
 - [ ] 5. 주문 object로 변경 (EventOrderHandler)
 - [ ] 6. 주문 조건 검증 (EventInputValidator)
 - [ ] 7. 요일 산출 (EventDayHandler)

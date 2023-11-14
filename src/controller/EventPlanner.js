@@ -83,13 +83,25 @@ class EventPlanner {
     };
   }
 
-  static calculateTotalBenefits(benefitsResult) {
+  static calculateDiscount(benefitsResult) {
     const discountPrice = Object.keys(benefitsResult.discountPrice).reduce(
       (acc, menuType) => acc + benefitsResult.discountPrice[menuType],
       0,
     );
+    return discountPrice;
+  }
+
+  static calculateTotalBenefits(benefitsResult) {
+    const discountPrice = EventPlanner.calculateDiscount(benefitsResult);
     const { giftPrice } = benefitsResult;
     return discountPrice + giftPrice;
+  }
+
+  static calculateEstimatedPayment(rawOrder, benefitsResult) {
+    return (
+      EventPlanner.calculateTotalPayment(rawOrder) -
+      EventPlanner.calculateDiscount(benefitsResult)
+    );
   }
 
   static benefitDDay(discountPrice) {
