@@ -37,6 +37,15 @@ describe('EventPlanner 테스트', () => {
     const output = 1_100 + 2_023 + 25_000;
     expect(result).toBe(output);
   });
+  test('할인 후 예상 결제 금액', () => {
+    const benefitsResult = planner.summaryBenefitsResult(totalPayment);
+    const result = EventPlanner.calculateEstimatedPayment(
+      rawOrder,
+      benefitsResult,
+    );
+    const output = totalPayment - (1_100 + 2_023);
+    expect(result).toBe(output);
+  });
   test('혜택 내역 산출', () => {
     const beneftis = planner.summaryBenefitsResult(10_000);
     const result = EventPlanner.formApplyingBenefitsList(beneftis);
