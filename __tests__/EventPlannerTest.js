@@ -3,8 +3,18 @@ import DAYOFTHEWEEK from '../src/models/constants/DayOfTheWeek.js';
 
 describe('EventPlanner 테스트', () => {
   const dateInfo = { day: 2, dayOfTheWeek: DAYOFTHEWEEK.SATURDAY };
-  const order = { menuCount: { desert: 1, main: 1 }, payment: 10_000 };
-  const planner = new EventPlanner(dateInfo, order);
+  const rawOrder = {
+    appetizer: { buttonMushroomSoup: 1, tapas: 0, caesarSalad: 0 },
+    main: { tBoneSteak: 1, bBQRibs: 0, seafoodPasta: 0, christmasPasta: 0 },
+    desert: { chocolateCake: 0, iceCream: 1 },
+    drink: { zeroCola: 1, redWine: 1, champagne: 0 },
+  };
+  const planner = new EventPlanner(dateInfo, rawOrder);
+  test('주문한 메뉴 타입 분류 및 카운팅', () => {
+    const result = EventPlanner.countMenuType(rawOrder);
+    const output = { appetizer: 1, main: 1, desert: 1, drink: 2 };
+    expect(result).toEqual(output);
+  });
   test('적용 가능 혜택 체크', () => {
     const result = planner.summaryBenefitsResult(10_000);
     const output = {
