@@ -16,7 +16,7 @@
   - [x] 4-1. 총혜택 금액 계산
   - [x] 4-2. 할인 전 총주문 금액 계산
   - [x] 4-3. 할인 후 예상 결제 금액 계산
-- [ ] 5. 주문 object로 변경 (EventOrderHandler)
+- [ ] 5. 주문 object로 변경 (OrderHandler)
 - [ ] 6. 주문 조건 검증 (EventInputValidator)
 - [ ] 7. 요일 산출 (EventDayHandler)
 - [ ] 8. 날짜 조건 검증 (EventInputValidator)
@@ -85,7 +85,7 @@
   요일 제대로 산출 된건지
 ```
 
-### EventOrderHandler
+### OrderHandler
 
 > 기능
 

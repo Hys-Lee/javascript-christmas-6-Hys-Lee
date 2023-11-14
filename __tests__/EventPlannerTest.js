@@ -3,21 +3,21 @@ import DAYOFTHEWEEK from '../src/models/constants/DayOfTheWeek.js';
 
 describe('EventPlanner 테스트', () => {
   const dateInfo = { day: 2, dayOfTheWeek: DAYOFTHEWEEK.SATURDAY };
-  const rawOrder = {
+  const totalOrder = {
     appetizer: { buttonMushroomSoup: 1, tapas: 0, caesarSalad: 0 },
     main: { tBoneSteak: 1, bBQRibs: 0, seafoodPasta: 0, christmasPasta: 0 },
     desert: { chocolateCake: 0, iceCream: 1 },
     drink: { zeroCola: 1, redWine: 1, champagne: 0 },
   };
-  const planner = new EventPlanner(dateInfo, rawOrder);
+  const planner = new EventPlanner(dateInfo, totalOrder);
   const totalPayment = 6_000 + 55_000 + 5_000 + 3_000 + 60_000;
   test('주문한 메뉴 타입 분류 및 카운팅', () => {
-    const result = EventPlanner.countMenuType(rawOrder);
+    const result = EventPlanner.countMenuType(totalOrder);
     const output = { appetizer: 1, main: 1, desert: 1, drink: 2 };
     expect(result).toEqual(output);
   });
   test('할인 전 총주문 금액 계산', () => {
-    const result = EventPlanner.calculateTotalPayment(rawOrder);
+    const result = EventPlanner.calculateTotalPayment(totalOrder);
     const output = totalPayment;
     expect(result).toBe(output);
   });
@@ -40,7 +40,7 @@ describe('EventPlanner 테스트', () => {
   test('할인 후 예상 결제 금액', () => {
     const benefitsResult = planner.summaryBenefitsResult(totalPayment);
     const result = EventPlanner.calculateEstimatedPayment(
-      rawOrder,
+      totalOrder,
       benefitsResult,
     );
     const output = totalPayment - (1_100 + 2_023);

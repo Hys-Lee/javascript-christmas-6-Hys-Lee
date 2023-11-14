@@ -19,15 +19,15 @@ class EventPlanner {
    * @param {day, dayOfTheWeek} dateInfo
    * @param { menuCount: { desert, main }, payment } order
    */
-  constructor(dateInfo, rawOrder) {
+  constructor(dateInfo, totalOrder) {
     this.#totalBenefits = 0;
     this.#estimatedPayment = 0;
     this.initOrderMenuTypesCount();
-    const menuCount = EventPlanner.countMenuType(rawOrder);
-    this.#totalPayment = EventPlanner.calculateTotalPayment(rawOrder);
-    const order = { menuCount, payment: this.#totalPayment };
+    const menuCount = EventPlanner.countMenuType(totalOrder);
+    this.#totalPayment = EventPlanner.calculateTotalPayment(totalOrder);
+    const coreOrder = { menuCount, payment: this.#totalPayment };
 
-    this.#events = new Events(dateInfo, order);
+    this.#events = new Events(dateInfo, coreOrder);
     this.#eventResult = {};
   }
 
@@ -37,26 +37,29 @@ class EventPlanner {
     const benefitsList = EventPlanner.formApplyingBenefitsList(benefitsResult);
   }
 
-  static countMenuType(rawOrder) {
+  static countMenuType(totalOrder) {
     const order = { appetizer: 0, main: 0, desert: 0, drink: 0 };
     Object.keys(order).forEach((type) => {
-      order[type] = Object.keys(rawOrder[type]).reduce(
-        (acc, curMenu) => acc + rawOrder[type][curMenu],
+      order[type] = Object.keys(totalOrder[type]).reduce(
+        (acc, curMenu) => acc + totalOrder[type][curMenu],
         0,
       );
     });
     return order;
   }
 
-  static calculateTotalPayment(rawOrder) {
-    const totalPayment = Object.keys(rawOrder).reduce((totalAcc, menuType) => {
-      const paymentOnMenuType = Object.keys(rawOrder[menuType]).reduce(
-        (acc, menu) =>
-          MENULIST[menuType][menu] * rawOrder[menuType][menu] + acc,
-        0,
-      );
-      return totalAcc + paymentOnMenuType;
-    }, 0);
+  static calculateTotalPayment(totalOrder) {
+    const totalPayment = Object.keys(totalOrder).reduce(
+      (totalAcc, menuType) => {
+        const paymentOnMenuType = Object.keys(totalOrder[menuType]).reduce(
+          (acc, menu) =>
+            MENULIST[menuType][menu] * totalOrder[menuType][menu] + acc,
+          0,
+        );
+        return totalAcc + paymentOnMenuType;
+      },
+      0,
+    );
 
     return totalPayment;
   }
@@ -97,9 +100,9 @@ class EventPlanner {
     return discountPrice + giftPrice;
   }
 
-  static calculateEstimatedPayment(rawOrder, benefitsResult) {
+  static calculateEstimatedPayment(totalOrder, benefitsResult) {
     return (
-      EventPlanner.calculateTotalPayment(rawOrder) -
+      EventPlanner.calculateTotalPayment(totalOrder) -
       EventPlanner.calculateDiscount(benefitsResult)
     );
   }
