@@ -15,6 +15,11 @@ describe('EventPlanner 테스트', () => {
     const output = { appetizer: 1, main: 1, desert: 1, drink: 2 };
     expect(result).toEqual(output);
   });
+  test('할인 전 총주문 금액 계산', () => {
+    const result = EventPlanner.calculateTotalPayment(rawOrder);
+    const output = 6_000 + 55_000 + 5_000 + 3_000 + 60_000;
+    expect(result).toEqual(output);
+  });
   test('적용 가능 혜택 체크', () => {
     const result = planner.summaryBenefitsResult(10_000);
     const output = {
