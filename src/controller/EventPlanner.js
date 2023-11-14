@@ -1,5 +1,6 @@
 import Events from '../models/domain/Events.js';
 import BENEFITSNAMES from '../models/constants/CommentConstants.js';
+import { MENULIST } from '../models/constants/MenuData.js';
 
 class EventPlanner {
   #totalPayment;
@@ -19,13 +20,12 @@ class EventPlanner {
    * @param { menuCount: { desert, main }, payment } order
    */
   constructor(dateInfo, rawOrder) {
-    this.#totalPayment = 0;
     this.#totalBenefits = 0;
     this.#estimatedPayment = 0;
     this.initOrderMenuTypesCount();
     const menuCount = EventPlanner.countMenuType(rawOrder);
-    const payment = 0;
-    const order = { menuCount, payment };
+    this.#totalPayment = EventPlanner.calculateTotalPayment(rawOrder);
+    const order = { menuCount, payment: this.#totalPayment };
     this.#events = new Events(dateInfo, order);
     this.#eventResult = {};
   }
@@ -45,6 +45,18 @@ class EventPlanner {
       );
     });
     return order;
+  }
+
+  static calculateTotalPayment(rawOrder) {
+    const totalPayment = Object.keys(rawOrder).reduce((totalAcc, menuType) => {
+      const paymentOnMenuType = Object.keys(rawOrder[menuType]).reduce(
+        (acc, menu) =>
+          MENULIST[menuType][menu] * rawOrder[menuType][menu] + acc,
+        0,
+      );
+      return totalAcc + paymentOnMenuType;
+    }, 0);
+    return totalPayment;
   }
 
   initOrderMenuTypesCount() {
