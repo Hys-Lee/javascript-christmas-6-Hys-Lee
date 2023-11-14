@@ -26,16 +26,17 @@ class EventPlanner {
     const menuCount = EventPlanner.countMenuType(rawOrder);
     this.#totalPayment = EventPlanner.calculateTotalPayment(rawOrder);
     const order = { menuCount, payment: this.#totalPayment };
+
     this.#events = new Events(dateInfo, order);
     this.#eventResult = {};
   }
 
   plan() {
     const benefitsResult = this.summaryBenefitsResult(this.#totalPayment);
+    this.#totalBenefits = EventPlanner.calculateTotalBenefits(benefitsResult);
     const benefitsList = EventPlanner.formApplyingBenefitsList(benefitsResult);
   }
 
-  // rawOrder: 에피타이저의 각 메뉴가 몇 개씩 주문됐는지 등. object로.
   static countMenuType(rawOrder) {
     const order = { appetizer: 0, main: 0, desert: 0, drink: 0 };
     Object.keys(order).forEach((type) => {
@@ -56,6 +57,7 @@ class EventPlanner {
       );
       return totalAcc + paymentOnMenuType;
     }, 0);
+
     return totalPayment;
   }
 
@@ -81,6 +83,15 @@ class EventPlanner {
     };
   }
 
+  static calculateTotalBenefits(benefitsResult) {
+    const discountPrice = Object.keys(benefitsResult.discountPrice).reduce(
+      (acc, menuType) => acc + benefitsResult.discountPrice[menuType],
+      0,
+    );
+    const { giftPrice } = benefitsResult;
+    return discountPrice + giftPrice;
+  }
+
   static benefitDDay(discountPrice) {
     return {
       name: BENEFITSNAMES.DDAYDISCOUNT,
@@ -89,7 +100,6 @@ class EventPlanner {
   }
 
   static benefitWeekday(discountPrice) {
-    // const { discountPrice } = this.#eventResult;
     return {
       name: BENEFITSNAMES.WEEKDAYDISCOUNT,
       price: discountPrice.weekday,
