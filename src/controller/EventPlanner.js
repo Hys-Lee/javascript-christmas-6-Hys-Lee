@@ -18,13 +18,33 @@ class EventPlanner {
    * @param {day, dayOfTheWeek} dateInfo
    * @param { menuCount: { desert, main }, payment } order
    */
-  constructor(dateInfo, order) {
+  constructor(dateInfo, rawOrder) {
     this.#totalPayment = 0;
     this.#totalBenefits = 0;
     this.#estimatedPayment = 0;
     this.initOrderMenuTypesCount();
+    const menuCount = EventPlanner.countMenuType(rawOrder);
+    const payment = 0;
+    const order = { menuCount, payment };
     this.#events = new Events(dateInfo, order);
     this.#eventResult = {};
+  }
+
+  plan() {
+    const benefitsResult = this.summaryBenefitsResult(this.#totalPayment);
+    const benefitsList = EventPlanner.formApplyingBenefitsList(benefitsResult);
+  }
+
+  // rawOrder: 에피타이저의 각 메뉴가 몇 개씩 주문됐는지 등. object로.
+  static countMenuType(rawOrder) {
+    const order = { appetizer: 0, main: 0, desert: 0, drink: 0 };
+    Object.keys(order).forEach((type) => {
+      order[type] = Object.keys(rawOrder[type]).reduce(
+        (acc, curMenu) => acc + rawOrder[type][curMenu],
+        0,
+      );
+    });
+    return order;
   }
 
   initOrderMenuTypesCount() {
@@ -99,13 +119,6 @@ class EventPlanner {
     if (giftPrice !== 0)
       benefitsList.gift = EventPlanner.benefitGift(giftPrice);
     return benefitsList;
-  }
-
-  plan() {
-    // this.storeEventResult(this.#totalPayment, this.#totalBenefits);
-    // this.#eventResult = this.#events.eventResult;
-    const benefitsResult = this.summaryBenefitsResult(this.#totalPayment);
-    const benefitsList = EventPlanner.formApplyingBenefitsList(benefitsResult);
   }
 }
 export default EventPlanner;
