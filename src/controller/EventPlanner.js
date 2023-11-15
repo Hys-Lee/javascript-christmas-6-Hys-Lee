@@ -157,5 +157,9 @@ class EventPlanner {
       benefitsList.gift = EventPlanner.benefitGift(giftPrice);
     return benefitsList;
   }
+
+  static hasApplyingBenefits(benefitsList) {
+    return Object.keys(benefitsList).length != 0;
+  }
 }
 export default EventPlanner;
