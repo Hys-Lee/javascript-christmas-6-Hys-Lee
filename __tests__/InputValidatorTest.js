@@ -64,4 +64,12 @@ describe(`InputValidator 테스트`, () => {
     const validOutput = false;
     expect(validResult).toBe(validOutput);
   });
+
+  // 날짜
+  test('1~31 사이의 정수 날짜 값 확인', () => {
+    const day = 32;
+    const result = InputValidator.isValidDay();
+    const output = false;
+    expect(result).toBe(output);
+  });
 });
