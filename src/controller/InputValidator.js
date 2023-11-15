@@ -55,5 +55,12 @@ class InputValidator {
     }
     return false;
   }
+
+  static hasNotPositiveAmount(orderArray) {
+    return orderArray.reduce(
+      (result, order) => Object.values(order)[0] >= 1 || result,
+      false,
+    ); // 하나라도 true섞이면 true 반환
+  }
 }
 export default InputValidator;
