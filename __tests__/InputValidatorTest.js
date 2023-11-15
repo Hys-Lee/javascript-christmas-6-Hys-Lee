@@ -23,4 +23,15 @@ describe(`InputValidator 테스트`, () => {
     const output = true;
     expect(result).toBe(output);
   });
+  test(`양수 개수 주문 체크`, () => {
+    const orderArray = [
+      { 아이스크림: 1 },
+      { 아이스크림: 1 },
+      { 초코케이크: 0 },
+    ];
+
+    const result = InputValidator.hasNotPositiveAmount(orderArray);
+    const output = true;
+    expect(result).toBe(output);
+  });
 });
