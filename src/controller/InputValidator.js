@@ -7,6 +7,7 @@
 - [ ] 메뉴 최대 20개까지 주문
 - [ ] 중복 메뉴 입력 불가능
  */
+import { KOERANMENUNAME } from '../models/constants/MenuData.js';
 
 class InputValidator {
   //
@@ -72,6 +73,16 @@ class InputValidator {
         this.#drinkAmount >
       20
     );
+  }
+
+  static hasNoneExistentMenu(orderArray) {
+    const orderedKoreanMenu = orderArray.map(
+      (eachOrder) => Object.keys(eachOrder)[0],
+    );
+    const selectedMenu = orderedKoreanMenu.filter((orderedOne) =>
+      Object.values(KOERANMENUNAME).includes(orderedOne),
+    );
+    return orderedKoreanMenu.length !== selectedMenu.length;
   }
 }
 export default InputValidator;
