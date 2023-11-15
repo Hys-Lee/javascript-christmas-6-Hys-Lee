@@ -89,5 +89,14 @@ class InputValidator {
   static isValidDay(day) {
     return day >= 1 && day <= 31;
   }
+
+  // 형식 검증 - 공통 : 날짜 검증
+  static isValidNumber(inputString) {
+    const inputNumber = Number(inputString);
+    if (Number.isNaN(inputNumber)) return false;
+    if (!Number.isInteger(inputNumber)) return false;
+    if (inputString.includes('.')) return false;
+    return true;
+  }
 }
 export default InputValidator;

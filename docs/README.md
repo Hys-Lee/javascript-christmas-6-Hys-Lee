@@ -26,6 +26,12 @@
 - [x] 7. 요일 산출 (EventDayHandler)
 - [x] 8. 날짜 조건 검증 (EventInputValidator)
 - [ ] 9. 입력값 형식 검증 (EventInputValidator)
+  - [x] 입력값 숫자형 및 정수 확인
+  - [ ] 메뉴이름과 수량을 '-'로 연결
+  - [ ] 메뉴 주문끼리 ','로 연결
+  - [ ] 메뉴 이름은 띄어쓰기 없는 한글
+  - [ ] 메뉴 수량은 숫자형
+  - [ ] 메뉴 수량은 정수형
 - [ ] 10. 메뉴 정보 저장 (MenuData)
 - [ ] 11. 출력관련 조건 체크 (EventPlanner)
 - [ ] 12. 입력기에 입력 값 반환 및 코멘트 인자 (InputView)
