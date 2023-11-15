@@ -1,3 +1,10 @@
+# 클래스 다이어그램 계획도
+
+![계획](./EventClassDiagram.png)
+
+<br>
+<br>
+
 # 개발 순서
 
 - [x] 1. 이벤트 조건 (Events)
