@@ -46,4 +46,22 @@ describe(`InputValidator 테스트`, () => {
     const output = true;
     expect(result).toBe(output);
   });
+  test(`존재하지 않는 메뉴 주문 체크`, () => {
+    const invalidOrderArray = [
+      { 아이스아메리카노: 1 },
+      { 아이스크림: 1 },
+      { 초코케이크: 1 },
+    ];
+    const invalidResult = InputValidator.hasNoneExistentMenu(invalidOrderArray);
+    const invalidOutput = true;
+    expect(invalidResult).toBe(invalidOutput);
+    const validOrderArray = [
+      { 티본스테이크: 1 },
+      { 아이스크림: 1 },
+      { 초코케이크: 1 },
+    ];
+    const validResult = InputValidator.hasNoneExistentMenu(validOrderArray);
+    const validOutput = false;
+    expect(validResult).toBe(validOutput);
+  });
 });
