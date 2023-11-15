@@ -12,8 +12,28 @@ class InputValidator {
   //
   #totalOrder;
 
+  #appetizerAmount;
+
+  #mainAmout;
+
+  #desertAmount;
+
+  #drinkAmount;
+
+  // 메뉴타입 상수화 해야겠다. 너무 자주 쓰이네. 다른 곳에서도 바꿔야 할 듯.
   constructor(totalOrder) {
     this.#totalOrder = totalOrder;
+    this.#appetizerAmount = this.countAmountOnMenuType('appetizer');
+    this.#mainAmout = this.countAmountOnMenuType('main');
+    this.#desertAmount = this.countAmountOnMenuType('desert');
+    this.#drinkAmount = this.countAmountOnMenuType('drink');
+  }
+
+  countAmountOnMenuType(menuTypeString) {
+    return Object.values(this.#totalOrder[menuTypeString]).reduce(
+      (total, amount) => total + amount,
+      0,
+    );
   }
 
   static hasRepetition(orderArray) {
@@ -23,12 +43,17 @@ class InputValidator {
     return orderArray.length !== validMenu.size;
   }
 
-  checkOnlyDrink() {
-    const appetizerAmount = Object.values(this.#totalOrder.appetizer).reduce(
-      (total, amount) => total + amount,
-      0,
-    );
-    // const mainAmount =
+  // totalOrder에 적용
+  hasOnlyDrink() {
+    if (
+      this.#appetizerAmount === 0 &&
+      this.#mainAmout === 0 &&
+      this.#desertAmount === 0 &&
+      this.#drinkAmount > 0
+    ) {
+      return true;
+    }
+    return false;
   }
 }
 export default InputValidator;
