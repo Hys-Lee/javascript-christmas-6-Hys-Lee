@@ -1,5 +1,6 @@
 import EventPlanner from '../src/controller/EventPlanner.js';
 import DAYOFTHEWEEK from '../src/models/constants/DayOfTheWeek.js';
+import BENEFITSNAMES from '../src/models/constants/CommentConstants.js';
 
 describe('EventPlanner 테스트', () => {
   const dateInfo = { day: 2, dayOfTheWeek: DAYOFTHEWEEK.SATURDAY };
@@ -55,5 +56,22 @@ describe('EventPlanner 테스트', () => {
     };
 
     expect(result).toEqual(output);
+  });
+  test('적용된 혜택 유무 확인', () => {
+    const inputWithBenefits = {
+      dDay: {
+        name: BENEFITSNAMES.DDAYDISCOUNT,
+        price: 1_100,
+      },
+    };
+    const inputWithoutBenefits = {};
+    const resultWithBenefits =
+      EventPlanner.hasApplyingBenefits(inputWithBenefits);
+    const outputWithBenefits = true;
+    expect(resultWithBenefits).toBe(outputWithBenefits);
+    const resultWithoutBenefits =
+      EventPlanner.hasApplyingBenefits(inputWithoutBenefits);
+    const outputWitoutBenefits = false;
+    expect(resultWithoutBenefits).toBe(outputWitoutBenefits);
   });
 });
