@@ -98,5 +98,34 @@ class InputValidator {
     if (inputString.includes('.')) return false;
     return true;
   }
+
+  // 형식 검증-주문
+  static reformOrderIfWithBar(orderOnMenu) {
+    const orderWithAmount = orderOnMenu
+      .filter((menu) => menu.includes('-'))
+      .map((menu) => menu.split('-'));
+    return orderWithAmount;
+  }
+
+  static isOrderWithIntegerAmount(orderWithAmount) {
+    const orderValidity = orderWithAmount.reduce(
+      (accumulatingResult, menuAndAmount) => {
+        const amount = menuAndAmount[1];
+        return InputValidator.isValidNumber(amount) && accumulatingResult;
+      },
+      true,
+    );
+    return orderValidity;
+  }
+
+  static isValidOrder(orderString) {
+    const orderOnMenu = orderString.split(',');
+    const orderWithAmount = InputValidator.reformOrderIfWithBar(orderOnMenu);
+    if (orderOnMenu.length !== orderWithAmount.length) return false;
+    const orderValidity =
+      InputValidator.isOrderWithIntegerAmount(orderWithAmount);
+    const hasBlank = orderString.includes(' ');
+    return orderValidity && !hasBlank;
+  }
 }
 export default InputValidator;
