@@ -6,6 +6,13 @@
 - 원: model
 - 직사각형: controller
 
+## 계층 (위에서부터)
+
+- player
+- interface
+- core operator
+- data
+
 ## 다이어그램
 
 ![계획](./EventClassDiagram.png)
