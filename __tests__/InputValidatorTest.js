@@ -74,7 +74,7 @@ describe(`InputValidator 테스트`, () => {
   });
 
   // 형식
-  test('정수 확인', () => {
+  test('정수 확인 (날짜 정수 형식 확인)', () => {
     const valiidNumberString = '123';
     const validResult = InputValidator.isValidNumber(valiidNumberString);
     const validOutput = true;
@@ -89,5 +89,32 @@ describe(`InputValidator 테스트`, () => {
     const invalidFloatResult = InputValidator.isValidNumber(invalidFloatString);
     const invalidFloatOutput = false;
     expect(invalidFloatResult).toBe(invalidFloatOutput);
+  });
+
+  test('주문 형식 확인', () => {
+    const validOrder = '아이스크림-1,초코케이크-2';
+    const validResult = InputValidator.isValidOrder(validOrder);
+    const validOutput = true;
+    expect(validResult).toBe(validOutput);
+    const invalidOrderWithNoBar = '아이스크림_1, 초코케이크_2';
+    const invalidResultWithNoBar = InputValidator.isValidOrder(
+      invalidOrderWithNoBar,
+    );
+    const invalidOutputWithNoBar = false;
+    expect(invalidResultWithNoBar).toBe(invalidOutputWithNoBar);
+    const invalidOrderWithNoIntegerAmount = '아이스크림-일,초코케이크-2';
+    const invalidResultWithNoIntegerAmount = InputValidator.isValidOrder(
+      invalidOrderWithNoIntegerAmount,
+    );
+    const invalidOutputWithNoIntegerAmount = false;
+    expect(invalidResultWithNoIntegerAmount).toBe(
+      invalidOutputWithNoIntegerAmount,
+    );
+    const invalidOrderWithSpace = '아이스크림-1, 초코케이크-2';
+    const invalidResultWithSpace = InputValidator.isValidOrder(
+      invalidOrderWithSpace,
+    );
+    const invalidOutputWithSpace = false;
+    expect(invalidResultWithSpace).toBe(invalidOutputWithSpace);
   });
 });
