@@ -65,11 +65,29 @@ describe(`InputValidator 테스트`, () => {
     expect(validResult).toBe(validOutput);
   });
 
-  // 날짜
+  // 날짜 조건
   test('1~31 사이의 정수 날짜 값 확인', () => {
     const day = 32;
     const result = InputValidator.isValidDay();
     const output = false;
     expect(result).toBe(output);
+  });
+
+  // 형식
+  test('정수 확인', () => {
+    const valiidNumberString = '123';
+    const validResult = InputValidator.isValidNumber(valiidNumberString);
+    const validOutput = true;
+    expect(validResult).toBe(validOutput);
+    const invalidNoneNumberString = 'asdf';
+    const invalidNoneNumberResult = InputValidator.isValidNumber(
+      invalidNoneNumberString,
+    );
+    const invalidNoneNumberOutput = false;
+    expect(invalidNoneNumberResult).toBe(invalidNoneNumberOutput);
+    const invalidFloatString = '1.0';
+    const invalidFloatResult = InputValidator.isValidNumber(invalidFloatString);
+    const invalidFloatOutput = false;
+    expect(invalidFloatResult).toBe(invalidFloatOutput);
   });
 });
