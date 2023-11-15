@@ -24,7 +24,7 @@
      - [x] 메뉴 최대 20개까지 주문
      - [x] 중복 메뉴 입력 불가능
 - [x] 7. 요일 산출 (EventDayHandler)
-- [ ] 8. 날짜 조건 검증 (EventInputValidator)
+- [x] 8. 날짜 조건 검증 (EventInputValidator)
 - [ ] 9. 입력값 형식 검증 (EventInputValidator)
 - [ ] 10. 메뉴 정보 저장 (MenuData)
 - [ ] 11. 출력관련 조건 체크 (EventPlanner)

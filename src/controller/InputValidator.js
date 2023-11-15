@@ -84,5 +84,10 @@ class InputValidator {
     );
     return orderedKoreanMenu.length !== selectedMenu.length;
   }
+
+  // 날짜 조건.
+  static isValidDay(day) {
+    return day >= 1 && day <= 31;
+  }
 }
 export default InputValidator;
