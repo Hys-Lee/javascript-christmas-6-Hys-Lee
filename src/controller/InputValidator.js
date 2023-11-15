@@ -62,5 +62,16 @@ class InputValidator {
       false,
     ); // 하나라도 true섞이면 true 반환
   }
+
+  // 나머진 valid상황에서..
+  hasLargerThanTwenty() {
+    return (
+      this.#appetizerAmount +
+        this.#mainAmout +
+        this.#desertAmount +
+        this.#drinkAmount >
+      20
+    );
+  }
 }
 export default InputValidator;
