@@ -1,4 +1,5 @@
-import { MENULIST, KOERANMENUNAME } from '../models/constants/MenuData';
+import { MENULIST, KOERANMENUNAME } from '../models/constants/MenuData.js';
+import InputValidator from './InputValidator.js';
 
 class OrderHandler {
   #orderStirng;
@@ -54,6 +55,19 @@ class OrderHandler {
       });
     });
     return orderResult;
+  }
+
+  makeOrderInfo() {
+    const orderArray = this.convertToArray();
+    if (InputValidator.hasRepetition(orderArray)) throw Error('[ERROR]');
+    if (InputValidator.hasNotPositiveAmount(orderArray)) throw Error('[ERROR]');
+    if (InputValidator.hasNoneExistentMenu(orderArray)) throw Error('[ERROR]');
+    const orderObject = this.reconstruct();
+    const validator = new InputValidator(orderObject);
+    if (validator.hasOnlyDrink()) throw Error('[ERROR]');
+    if (validator.hasLargerThanTwenty()) throw Error('[ERROR]');
+
+    return orderObject;
   }
 }
 export default OrderHandler;

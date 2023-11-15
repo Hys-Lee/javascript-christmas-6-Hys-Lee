@@ -1,5 +1,5 @@
 import Events from '../models/domain/Events.js';
-import BENEFITSNAMES from '../models/constants/CommentConstants.js';
+import { BENEFITSNAMES } from '../view/CommentData.js';
 import { MENULIST } from '../models/constants/MenuData.js';
 
 class EventPlanner {
@@ -15,9 +15,17 @@ class EventPlanner {
 
   #eventResult;
 
+  #totalOrder;
+
+  #day;
+
+  #orderList;
+
+  #badge;
+
   /**
    * @param {day, dayOfTheWeek} dateInfo
-   * @param { menuCount: { desert, main }, payment } order
+   
    */
   constructor(dateInfo, totalOrder) {
     this.#totalBenefits = 0;
@@ -26,15 +34,39 @@ class EventPlanner {
     const menuCount = EventPlanner.countMenuType(totalOrder);
     this.#totalPayment = EventPlanner.calculateTotalPayment(totalOrder);
     const coreOrder = { menuCount, payment: this.#totalPayment };
-
+    this.#totalOrder = totalOrder;
     this.#events = new Events(dateInfo, coreOrder);
     this.#eventResult = {};
+    this.#day = dateInfo.day;
+    this.#orderList = {};
+    this.#badge = '';
+  }
+
+  prepare(benefitsResult) {
+    // 순서가 있게 됨..
+    this.#totalBenefits = EventPlanner.calculateTotalBenefits(benefitsResult);
+    this.#estimatedPayment = EventPlanner.calculateEstimatedPayment(
+      this.#totalOrder,
+      benefitsResult,
+    );
+    this.#orderList = this.formOrderedMenuList();
+    this.#badge = Events.giveBadge(this.#totalBenefits);
   }
 
   plan() {
     const benefitsResult = this.summaryBenefitsResult(this.#totalPayment);
-    this.#totalBenefits = EventPlanner.calculateTotalBenefits(benefitsResult);
+    this.prepare(benefitsResult);
     const benefitsList = EventPlanner.formApplyingBenefitsList(benefitsResult);
+    const outputElements = {
+      day: this.#day,
+      orderList: this.#orderList,
+      totalPayment: this.#totalPayment,
+      benefitsList,
+      totalBenefits: this.#totalBenefits,
+      estimatedPayment: this.#estimatedPayment,
+      badge: this.#badge,
+    };
+    return outputElements;
   }
 
   static countMenuType(totalOrder) {
@@ -158,8 +190,19 @@ class EventPlanner {
     return benefitsList;
   }
 
+  formOrderedMenuList() {
+    const orderList = {};
+    Object.values(this.#totalOrder).forEach((menuInMenuType) => {
+      Object.keys(menuInMenuType).forEach((menuName) => {
+        if (menuInMenuType[menuName] > 0)
+          orderList[menuName] = menuInMenuType[menuName];
+      });
+    });
+    return orderList;
+  }
+
   static hasApplyingBenefits(benefitsList) {
-    return Object.keys(benefitsList).length != 0;
+    return Object.keys(benefitsList).length !== 0;
   }
 }
 export default EventPlanner;

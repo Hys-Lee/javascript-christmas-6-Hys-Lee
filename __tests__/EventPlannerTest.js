@@ -1,6 +1,6 @@
 import EventPlanner from '../src/controller/EventPlanner.js';
 import DAYOFTHEWEEK from '../src/models/constants/DayOfTheWeek.js';
-import BENEFITSNAMES from '../src/models/constants/CommentConstants.js';
+import { BENEFITSNAMES } from '../src/view/CommentData.js';
 
 describe('EventPlanner 테스트', () => {
   const dateInfo = { day: 2, dayOfTheWeek: DAYOFTHEWEEK.SATURDAY };

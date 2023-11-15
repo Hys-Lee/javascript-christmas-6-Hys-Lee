@@ -1,14 +1,26 @@
-import DAYOFTHEWEEK from '../models/constants/DayOfTheWeek';
+import DAYOFTHEWEEK from '../models/constants/DayOfTheWeek.js';
+import InputValidator from './InputValidator.js';
 
 class DayHandler {
-  #day;
+  #dayString;
 
-  constructor(day) {
-    this.#day = day;
+  constructor(dayString) {
+    this.#dayString = dayString;
   }
 
-  showDayOfTheWeek() {
-    return this.#day % 7;
+  static showDayOfTheWeek(dayNumber) {
+    return dayNumber % 7;
+  }
+
+  checkValidDay() {
+    if (!InputValidator.isValidDay(this.#dayString))
+      throw Error(`날짜가 아닙니다`);
+  }
+
+  makeDateInfo() {
+    const dayNumber = Number(this.#dayString);
+    const dayOfTheWeek = DayHandler.showDayOfTheWeek(dayNumber);
+    return { day: dayNumber, dayOfTheWeek };
   }
 }
 export default DayHandler;

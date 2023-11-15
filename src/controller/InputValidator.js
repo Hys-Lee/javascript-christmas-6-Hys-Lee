@@ -41,6 +41,7 @@ class InputValidator {
     const validMenu = new Set(
       orderArray.map((eachOrder) => Object.keys(eachOrder)[0]),
     );
+
     return orderArray.length !== validMenu.size;
   }
 
@@ -59,7 +60,7 @@ class InputValidator {
 
   static hasNotPositiveAmount(orderArray) {
     return orderArray.reduce(
-      (result, order) => Object.values(order)[0] >= 1 || result,
+      (result, order) => Object.values(order)[0] < 1 || result,
       false,
     ); // 하나라도 true섞이면 true 반환
   }
@@ -86,7 +87,8 @@ class InputValidator {
   }
 
   // 날짜 조건.
-  static isValidDay(day) {
+  static isValidDay(dayString) {
+    const day = Number(dayString);
     return day >= 1 && day <= 31;
   }
 
@@ -126,6 +128,14 @@ class InputValidator {
       InputValidator.isOrderWithIntegerAmount(orderWithAmount);
     const hasBlank = orderString.includes(' ');
     return orderValidity && !hasBlank;
+  }
+
+  static checkValidDayForm(dayString) {
+    if (!InputValidator.isValidDay(dayString)) throw Error('[ERROR]');
+  }
+
+  static checkValidOrderForm(orderString) {
+    if (!InputValidator.isValidOrder(orderString)) throw Error('[ERROR]');
   }
 }
 export default InputValidator;

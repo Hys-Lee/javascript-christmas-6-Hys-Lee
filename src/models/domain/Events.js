@@ -2,10 +2,10 @@ import { MENULIST } from '../constants/MenuData.js';
 import DAYOFTHEWEEK from '../constants/DayOfTheWeek.js';
 
 class Events {
-  /**
-   * @param {day, dayOfTheWeek} dateInfo
-   * @param { menuCount: { desert, main }, payment } order
-   */
+  // /**
+  //  * @param {day, dayOfTheWeek} dateInfo
+  //  * @param { menuCount: { desert, main }, payment } order
+  //  */
   #day;
 
   #dayOfTheWeek;
