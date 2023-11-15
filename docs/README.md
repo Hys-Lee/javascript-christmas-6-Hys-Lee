@@ -1,5 +1,13 @@
 # 클래스 다이어그램 계획도
 
+## 모양
+
+- 마름모: view
+- 원: model
+- 직사각형: controller
+
+## 다이어그램
+
 ![계획](./EventClassDiagram.png)
 
 <br>
