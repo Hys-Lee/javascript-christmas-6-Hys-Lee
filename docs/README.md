@@ -18,6 +18,11 @@
   - [x] 4-3. 할인 후 예상 결제 금액 계산
 - [x] 5. 주문 object로 변경 (OrderHandler)
 - [ ] 6. 주문 조건 검증 (EventInputValidator)
+     - [ ] 음료만 주문 불가능
+     - [ ] 존재하는 메뉴만 주문 가능
+     - [ ] 메뉴 주문 시 1개 이상 주문
+     - [ ] 메뉴 최대 20개까지 주문
+     - [x] 중복 메뉴 입력 불가능
 - [ ] 7. 요일 산출 (EventDayHandler)
 - [ ] 8. 날짜 조건 검증 (EventInputValidator)
 - [ ] 9. 입력값 형식 검증 (EventInputValidator)
